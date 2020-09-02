@@ -1,7 +1,6 @@
 import React from "react"
 import Flip from "react-reveal/Flip"
 import Slide from "react-reveal/Slide"
-import withReveal from "react-reveal/withReveal"
 import PropTypes from "prop-types"
 
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -139,7 +138,7 @@ const MobileBlocks = styled.div`
   width: calc(100% + 20px);
 
   .swiper-slide {
-    width: 85%;
+    width: 85vw;
     max-width: 400px;
     height: auto;
     position: relative;
@@ -251,9 +250,6 @@ const PDValue = styled.p`
   margin: 0;
 `
 
-const AnimatedMobileBlocks = withReveal(MobileBlocks, <Slide bottom />)
-const AnimatedDesktopBlocks = withReveal(DesktopBlocks, <Slide bottom />)
-
 const Offer = ({ offer }) => {
   const { iconName, title, shortDescription, fullDescription } = offer
 
@@ -291,7 +287,7 @@ const Offers = ({ offersData }) => {
         </Flip>
       </Info>
       <Blocks>
-        <AnimatedMobileBlocks>
+        <MobileBlocks>
           <Swiper spaceBetween={30} slidesPerView="auto">
             {offers.map((offer, index) => (
               <SwiperSlide key={index}>
@@ -299,12 +295,14 @@ const Offers = ({ offersData }) => {
               </SwiperSlide>
             ))}
           </Swiper>
-        </AnimatedMobileBlocks>
-        <AnimatedDesktopBlocks>
-          {offers.map((offer, index) => (
-            <Offer key={index} offer={offer} />
-          ))}
-        </AnimatedDesktopBlocks>
+        </MobileBlocks>
+        <Slide bottom>
+          <DesktopBlocks>
+            {offers.map((offer, index) => (
+              <Offer key={index} offer={offer} />
+            ))}
+          </DesktopBlocks>
+        </Slide>
       </Blocks>
     </Container>
   )

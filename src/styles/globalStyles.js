@@ -22,6 +22,7 @@ const GlobalStyle = createGlobalStyle`
 html {
     font-size: 62.5%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    overflow-x: hidden;
 }
 
 body {
