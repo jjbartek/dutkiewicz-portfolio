@@ -19,7 +19,7 @@ import {
   MenuItem,
   MenuLink,
   SideRow,
-} from "./headerStyles"
+} from "./HeaderStyles"
 
 import Button from "_components/Button"
 
