@@ -42,7 +42,8 @@ const Section = ({
     const { windowHeight, windowWidth } = useWindowDimensions()
     const hasFixedHeight = heightFixedOnDesktop ? windowWidth >= 1200 : true
   } else {
-    const windowHeight = (windowWidth = 0)
+    const windowHeight = 0
+    const windowWidth = 0
     const hasFixedHeight = true
   }
 
