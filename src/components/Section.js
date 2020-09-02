@@ -38,8 +38,13 @@ const Section = ({
   children,
   id,
 }) => {
-  const { windowHeight, windowWidth } = useWindowDimensions()
-  const hasFixedHeight = heightFixedOnDesktop ? windowWidth >= 1200 : true
+  if (typeof window !== "undefined") {
+    const { windowHeight, windowWidth } = useWindowDimensions()
+    const hasFixedHeight = heightFixedOnDesktop ? windowWidth >= 1200 : true
+  } else {
+    const windowHeight = (windowWidth = 0)
+    const hasFixedHeight = true
+  }
 
   const style = {
     minHeight: windowHeight,
