@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useLayoutEffect } from "react"
 
 function getWindowDimensions() {
   if (typeof window !== "undefined") {
@@ -26,8 +26,13 @@ export function useWindowDimensions() {
     }
 
     handleResize()
+    window.addEventListener("DOMContentLoaded", handleResize)
     window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
+
+    return () => {
+      window.addEventListener("DOMContentLoaded", handleResize)
+      window.removeEventListener("resize", handleResize)
+    }
   }, [])
 
   return windowDimensions
