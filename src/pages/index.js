@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 import { injectIntl } from "gatsby-plugin-intl"
 
 import Layout from "_components/layouts/Default"
-import Header from "_components/header/header"
+import Header from "_components/header/Header"
 import Section from "_components/Section"
 
 import Testimonials from "_sections/Testimonials"
