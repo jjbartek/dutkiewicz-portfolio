@@ -1,6 +1,7 @@
 import React from "react"
 import Flip from "react-reveal/Flip"
 import Slide from "react-reveal/Slide"
+import withReveal from "react-reveal/withReveal"
 import PropTypes from "prop-types"
 
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -16,9 +17,12 @@ import { mQuery, colors } from "_styles/theme"
 
 const Container = styled.div`
   width: 100%;
+  min-height: 100%;
   display: flex;
+  flex-wrap: wrap;
 
   ${mQuery("up-lg")(css`
+    flex-wrap: nowrap;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -117,6 +121,14 @@ const Blocks = styled.div`
   ${mQuery("up-lg")(css`
     flex: 0 1 52%;
     height: 100%;
+    display: flex;
+
+    .react-reveal {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   `)}
 `
 
@@ -239,6 +251,9 @@ const PDValue = styled.p`
   margin: 0;
 `
 
+const AnimatedMobileBlocks = withReveal(MobileBlocks, <Slide bottom />)
+const AnimatedDesktopBlocks = withReveal(DesktopBlocks, <Slide bottom />)
+
 const Offer = ({ offer }) => {
   const { iconName, title, shortDescription, fullDescription } = offer
 
@@ -276,22 +291,20 @@ const Offers = ({ offersData }) => {
         </Flip>
       </Info>
       <Blocks>
-        <Slide bottom>
-          <MobileBlocks>
-            <Swiper spaceBetween={30} slidesPerView="auto">
-              {offers.map((offer, index) => (
-                <SwiperSlide key={index}>
-                  <Offer offer={offer} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          </MobileBlocks>
-          <DesktopBlocks>
+        <AnimatedMobileBlocks>
+          <Swiper spaceBetween={30} slidesPerView="auto">
             {offers.map((offer, index) => (
-              <Offer key={index} offer={offer} />
+              <SwiperSlide key={index}>
+                <Offer offer={offer} />
+              </SwiperSlide>
             ))}
-          </DesktopBlocks>
-        </Slide>
+          </Swiper>
+        </AnimatedMobileBlocks>
+        <AnimatedDesktopBlocks>
+          {offers.map((offer, index) => (
+            <Offer key={index} offer={offer} />
+          ))}
+        </AnimatedDesktopBlocks>
       </Blocks>
     </Container>
   )

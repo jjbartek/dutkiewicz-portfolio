@@ -1,8 +1,6 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import styled, { css } from "styled-components"
 import PropTypes from "prop-types"
-
-import { useWindowDimensions } from "_utils/hooks"
 
 import Socials from "_components/Socials"
 import BottomLine from "_components/BottomLine"
@@ -18,8 +16,8 @@ const StyledSection = styled.section`
   padding-bottom: 123px;
   padding-top: 82px;
 
-  ${({ fixedHeight }) =>
-    fixedHeight &&
+  ${({ hasFixedHeight }) =>
+    hasFixedHeight &&
     css`
       height: 100vh;
       overflow-y: hidden;
@@ -38,7 +36,20 @@ const Section = ({
   children,
   id,
 }) => {
-  const { windowHeight, windowWidth } = useWindowDimensions()
+  const [windowWidth, setWindowWidth] = useState(0)
+  const [windowHeight, setWindowHeight] = useState(0)
+
+  useEffect(() => {
+    const setDimentions = () => {
+      setWindowWidth(window.innerWidth)
+      setWindowHeight(window.innerHeight)
+    }
+
+    setDimentions()
+    window.addEventListener("resize", setDimentions)
+    return () => window.removeEventListener("resize", setDimentions)
+  }, [])
+
   const hasFixedHeight = heightFixedOnDesktop ? windowWidth >= 1200 : true
 
   const style = {
@@ -49,7 +60,7 @@ const Section = ({
   }
 
   return (
-    <StyledSection fixedHeight={hasFixedHeight} style={style} id={id}>
+    <StyledSection hasFixedHeight={hasFixedHeight} style={style} id={id}>
       <SectionWrapper hasLeftGap={hasLeftGap} hasRightGap={true}>
         {children}
         <SiteContext.Consumer>
