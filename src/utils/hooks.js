@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react"
 
 function getWindowDimensions() {
-  const { innerWidth: windowWidth, innerHeight: windowheight } = window
-  return {
-    windowWidth,
-    windowheight,
+  if (typeof window !== "undefined") {
+    const { innerWidth: windowWidth, innerHeight: windowheight } = window
+    return {
+      windowWidth,
+      windowheight,
+    }
   }
 }
 
@@ -26,10 +28,12 @@ export function useWindowDimensions() {
 }
 
 function getWindowOffset() {
-  const { pageYOffset: offsetY, pageXOffset: offsetX } = window
-  return {
-    offsetY,
-    offsetX,
+  if (typeof window !== "undefined") {
+    const { pageYOffset: offsetY, pageXOffset: offsetX } = window
+    return {
+      offsetY,
+      offsetX,
+    }
   }
 }
 
