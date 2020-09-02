@@ -13,7 +13,7 @@ import Help from "_sections/Help"
 import Home from "_sections/Home"
 
 import SiteContext from "../store/SiteContext"
-import SEO from "_components/Seo"
+import SEO from "_components/SEO"
 
 const IndexPage = ({ data }) => {
   const {
