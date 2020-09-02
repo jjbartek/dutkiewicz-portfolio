@@ -46,6 +46,13 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `fonts`,
+        path: `${__dirname}/src/fonts`,
+      },
+    },
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `marcin-dutkiewicz`,
@@ -87,7 +94,7 @@ module.exports = {
         path: `${__dirname}/src/intl`,
         languages: [`en`, `pl`],
         defaultLanguage: `pl`,
-        redirect: false,
+        redirect: true,
       },
     },
     {

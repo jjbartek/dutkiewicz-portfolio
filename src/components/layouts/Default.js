@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 
+import LoadingScreen from "_components/LoadingScreen"
 import GlobalStyle from "_styles/globalStyles"
 
 import "swiper/components/navigation/navigation.scss"
@@ -11,6 +12,7 @@ const Default = ({ children }) => {
   return (
     <>
       <GlobalStyle />
+      <LoadingScreen />
       {children}
     </>
   )

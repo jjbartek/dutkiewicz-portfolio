@@ -25,15 +25,9 @@ export function useWindowDimensions() {
       setWindowDimensions(getWindowDimensions())
     }
 
-    if (typeof window !== "undefined") {
-      window.addEventListener("resize", handleResize)
-    }
-
-    return () => {
-      if (typeof window !== "undefined") {
-        window.removeEventListener("resize", handleResize)
-      }
-    }
+    handleResize()
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
   }, [])
 
   return windowDimensions
