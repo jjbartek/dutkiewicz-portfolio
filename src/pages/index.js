@@ -4,6 +4,7 @@ import { injectIntl } from "gatsby-plugin-intl"
 
 import Layout from "_components/layouts/Default"
 import Header from "_components/header/Header"
+import Sections from "_components/Sections"
 import Section from "_components/Section"
 
 import Testimonials from "_sections/Testimonials"
@@ -33,21 +34,27 @@ const IndexPage = ({ data }) => {
       <SEO meta={meta} />
       <Layout title="Home">
         <Header headerData={headerData}></Header>
-        <Section id="home">
-          <Home homeData={homeData} />
-        </Section>
-        <Section id="offers" hideContactData={true} heightFixedOnDesktop={true}>
-          <Offers offersData={offersData} />
-        </Section>
-        <Section id="portfolio" heightFixedOnDesktop={true}>
-          <Portfolio portfolioData={portfolioData} />
-        </Section>
-        <Section id="testimonials" hasLeftGap={true}>
-          <Testimonials testimonialsData={testimonialsData} />
-        </Section>
-        <Section id="help" hideScroll={true}>
-          <Help helpData={helpData} />
-        </Section>
+        <Sections>
+          <Section id="home">
+            <Home homeData={homeData} />
+          </Section>
+          <Section
+            id="offers"
+            hideContactData={true}
+            heightFixedOnMobile={false}
+          >
+            <Offers offersData={offersData} />
+          </Section>
+          <Section id="portfolio" heightFixedOnMobile={false}>
+            <Portfolio portfolioData={portfolioData} />
+          </Section>
+          <Section id="testimonials" hasLeftGap={true}>
+            <Testimonials testimonialsData={testimonialsData} />
+          </Section>
+          <Section id="help" hideScroll={true}>
+            <Help helpData={helpData} />
+          </Section>
+        </Sections>
       </Layout>
     </SiteContext.Provider>
   )

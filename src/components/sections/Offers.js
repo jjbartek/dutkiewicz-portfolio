@@ -1,6 +1,4 @@
 import React from "react"
-import Flip from "react-reveal/Flip"
-import Slide from "react-reveal/Slide"
 import PropTypes from "prop-types"
 
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -272,19 +270,17 @@ const Offers = ({ offersData }) => {
   return (
     <Container>
       <Info>
-        <Flip bottom cascade>
-          <Caption>{caption}</Caption>
-          <Heading size="big">{heading}</Heading>
-          <TextContainer size="big">{description}</TextContainer>
-          <PersonalData>
-            {personalData.map(({ title, value }, index) => (
-              <PDRow key={index}>
-                <PDTitle>{title}</PDTitle>
-                <PDValue>{value}</PDValue>
-              </PDRow>
-            ))}
-          </PersonalData>
-        </Flip>
+        <Caption>{caption}</Caption>
+        <Heading size="big">{heading}</Heading>
+        <TextContainer size="big">{description}</TextContainer>
+        <PersonalData>
+          {personalData.map(({ title, value }, index) => (
+            <PDRow key={index}>
+              <PDTitle>{title}</PDTitle>
+              <PDValue>{value}</PDValue>
+            </PDRow>
+          ))}
+        </PersonalData>
       </Info>
       <Blocks>
         <MobileBlocks>
@@ -296,13 +292,11 @@ const Offers = ({ offersData }) => {
             ))}
           </Swiper>
         </MobileBlocks>
-        <Slide bottom>
-          <DesktopBlocks>
-            {offers.map((offer, index) => (
-              <Offer key={index} offer={offer} />
-            ))}
-          </DesktopBlocks>
-        </Slide>
+        <DesktopBlocks>
+          {offers.map((offer, index) => (
+            <Offer key={index} offer={offer} />
+          ))}
+        </DesktopBlocks>
       </Blocks>
     </Container>
   )

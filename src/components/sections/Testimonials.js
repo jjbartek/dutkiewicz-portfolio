@@ -1,5 +1,4 @@
 import React from "react"
-import Slide from "react-reveal/Slide"
 import styled, { css } from "styled-components"
 import SwiperCore, { Navigation, Autoplay } from "swiper"
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -179,23 +178,21 @@ const Testimonials = ({ testimonialsData }) => {
       >
         {edges.map(({ node: { content, date, author } }, key) => (
           <SwiperSlide key={key}>
-            <Slide bottom>
-              <div>
-                <Heading as="h2" size="big">
-                  “{content}”
-                </Heading>
-                <Details>
-                  <Row>
-                    <Title>Author:</Title>
-                    <Value>{author}</Value>
-                  </Row>
-                  <Row>
-                    <Title>Date:</Title>
-                    <Value>{date}</Value>
-                  </Row>
-                </Details>
-              </div>
-            </Slide>
+            <div>
+              <Heading as="h2" size="big">
+                “{content}”
+              </Heading>
+              <Details>
+                <Row>
+                  <Title>Author:</Title>
+                  <Value>{author}</Value>
+                </Row>
+                <Row>
+                  <Title>Date:</Title>
+                  <Value>{date}</Value>
+                </Row>
+              </Details>
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>

@@ -73,42 +73,9 @@ const Scroll = styled.div`
   }
 `
 
-const Moon = styled.button`
-  margin-left: auto;
-  background: ${colors.mediumGrey};
-  border: 0;
-  outline: 0;
-  height: 53px;
-  width: 53px;
-  box-sizing: border-box;
-  border-radius: 50%;
-  font-size: 2.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: ${colors.white};
-
-  ${mQuery("up-lg")(css`
-    height: 48px;
-    width: 48px;
-    font-size: 2rem;
-    margin-left: 0;
-    position: absolute;
-    top: 50%;
-    right: ${gaps.wrapper};
-    transform: translateY(-50%);
-  `)}
-
-  ${mQuery("up-xl")(css`
-    height: 53px;
-    width: 53px;
-    font-size: 2.2rem;
-  `)}
-`
-
 const BottomLine = ({ hideScroll, hideContactData }) => (
   <BottomLineContainer>
-    <Wrap hasRightGap={true}>
+    <Wrap>
       {!hideScroll && (
         <Scroll>
           <Icon name="scroll" />
@@ -128,9 +95,6 @@ const BottomLine = ({ hideScroll, hideContactData }) => (
           )}
         </SiteContext.Consumer>
       )}
-      <Moon>
-        <Icon name="moon" />
-      </Moon>
     </Wrap>
   </BottomLineContainer>
 )

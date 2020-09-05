@@ -1,5 +1,4 @@
 import React from "react"
-import Slide from "react-reveal/Slide"
 import styled, { css } from "styled-components"
 import PropTypes from "prop-types"
 import Img from "gatsby-image"
@@ -73,17 +72,15 @@ const Home = ({ homeData }) => {
 
   return (
     <Container>
-      <Slide bottom>
-        <Content>
-          <Heading size="large">{heading}</Heading>
-          <TextContainer size="medium">{description}</TextContainer>
-          <DataWrap>
-            <SiteContext.Consumer>
-              {({ contactData }) => <Contact contactData={contactData} />}
-            </SiteContext.Consumer>
-          </DataWrap>
-        </Content>
-      </Slide>
+      <Content>
+        <Heading size="large">{heading}</Heading>
+        <TextContainer size="medium">{description}</TextContainer>
+        <DataWrap>
+          <SiteContext.Consumer>
+            {({ contactData }) => <Contact contactData={contactData} />}
+          </SiteContext.Consumer>
+        </DataWrap>
+      </Content>
       <HomeImg fluid={fluid} />
     </Container>
   )

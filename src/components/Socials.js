@@ -7,18 +7,21 @@ import { mQuery, gaps, colors } from "_styles/theme"
 
 const Container = styled.div`
   display: none;
-  position: absolute;
+  flex: 0 0 ${gaps.socials};
+
+  ${mQuery("up-lg")(css`
+    display: block;
+  `)}
+`
+
+const InnerContainer = styled.div`
+  position: sticky;
   top: 0;
-  bottom: 0;
-  right: ${gaps.wrapper};
-  width: ${gaps.socials};
+  height: 100vh;
   align-items: flex-end;
   justify-content: center;
   flex-direction: column;
-
-  ${mQuery("up-lg")(css`
-    display: flex;
-  `)}
+  display: flex;
 `
 
 const Item = styled.a`
@@ -49,11 +52,13 @@ const Socials = ({ socialMedia }) => {
 
   return (
     <Container>
-      {edges.map(({ node: { icon, url, title } }, index) => (
-        <Item href={url} alt={title} key={index}>
-          <Icon name={icon} />
-        </Item>
-      ))}
+      <InnerContainer>
+        {edges.map(({ node: { icon, url, title } }, index) => (
+          <Item href={url} alt={title} key={index}>
+            <Icon name={icon} />
+          </Item>
+        ))}
+      </InnerContainer>
     </Container>
   )
 }

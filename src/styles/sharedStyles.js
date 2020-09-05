@@ -9,6 +9,12 @@ export const Wrapper = styled.div`
   padding: 0 ${gaps.wrapper};
   position: relative;
   box-sizing: border-box;
+`
+
+export const SectionWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 
   ${({ hasLeftGap }) =>
     hasLeftGap &&
@@ -17,18 +23,4 @@ export const Wrapper = styled.div`
         padding-left: ${gaps.socials};
       `)}
     `}
-
-  ${({ hasRightGap }) =>
-    hasRightGap &&
-    css`
-      ${mQuery("up-lg")(css`
-        padding-right: ${gaps.socials};
-      `)}
-    `}
-`
-
-export const SectionWrapper = styled(Wrapper)`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
 `

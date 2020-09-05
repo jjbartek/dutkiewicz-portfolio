@@ -20,6 +20,7 @@ export const colors = {
 export const gaps = {
   wrapper: "20px",
   socials: "9.4%",
+  sections: "90.6%",
 }
 
 export const breakpoints = {

@@ -1,10 +1,10 @@
-import { createGlobalStyle } from "styled-components"
+import { createGlobalStyle, css } from "styled-components"
 
 import IcomoonTtf from "_fonts/icomoon/icomoon.ttf"
 import IcomoonWoff from "_fonts/icomoon/icomoon.woff"
 import IcomoonSvg from "_fonts/icomoon/icomoon.woff"
 
-import { colors, fonts } from "_styles/theme"
+import { mQuery, colors, fonts } from "_styles/theme"
 
 const GlobalStyle = createGlobalStyle`
 
@@ -23,6 +23,10 @@ html {
     font-size: 62.5%;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
     overflow-x: hidden;
+
+    ${mQuery("up-lg")(css`
+      overflow: unset;
+    `)}
 }
 
 body {

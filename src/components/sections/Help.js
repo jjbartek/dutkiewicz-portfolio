@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import Slide from "react-reveal/Slide"
 import PropTypes from "prop-types"
 
 import styled, { css } from "styled-components"
@@ -109,18 +108,16 @@ const Help = ({ helpData }) => {
   return (
     <Container>
       <Answers>
-        <Slide bottom>
-          {edges.map(({ node: { answer } }, index) => (
-            <Heading
-              key={index}
-              style={{ display: index === currentQuestion ? "block" : "none" }}
-              as="h2"
-              size="big"
-            >
-              “{answer}”
-            </Heading>
-          ))}
-        </Slide>
+        {edges.map(({ node: { answer } }, index) => (
+          <Heading
+            key={index}
+            style={{ display: index === currentQuestion ? "block" : "none" }}
+            as="h2"
+            size="big"
+          >
+            “{answer}”
+          </Heading>
+        ))}
       </Answers>
       <List>
         <Swiper slidesPerView="auto">
@@ -131,16 +128,14 @@ const Help = ({ helpData }) => {
                 setCurrentQuestion(index)
               }}
             >
-              <Slide left>
-                <QuestionWrap>
-                  <Title isActive={index === currentQuestion}>
-                    Tytuł pytania
-                  </Title>
-                  <Question isActive={index === currentQuestion}>
-                    {question}
-                  </Question>
-                </QuestionWrap>
-              </Slide>
+              <QuestionWrap>
+                <Title isActive={index === currentQuestion}>
+                  Tytuł pytania
+                </Title>
+                <Question isActive={index === currentQuestion}>
+                  {question}
+                </Question>
+              </QuestionWrap>
             </SwiperSlide>
           ))}
         </Swiper>

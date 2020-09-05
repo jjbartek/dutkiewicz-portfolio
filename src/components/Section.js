@@ -2,12 +2,9 @@ import React, { useState, useEffect } from "react"
 import styled, { css } from "styled-components"
 import PropTypes from "prop-types"
 
-import Socials from "_components/Socials"
 import BottomLine from "_components/BottomLine"
-import { mQuery } from "_styles/theme"
+import { mQuery, breakpoints } from "_styles/theme"
 import { SectionWrapper } from "_styles/sharedStyles"
-
-import SiteContext from "../store/SiteContext"
 
 const StyledSection = styled.section`
   position: relative;
@@ -15,13 +12,12 @@ const StyledSection = styled.section`
   box-sizing: border-box;
   padding-bottom: 123px;
   padding-top: 82px;
+  overflow-y: hidden;
 
-  ${({ hasFixedHeight }) =>
-    hasFixedHeight &&
-    css`
-      height: 100vh;
-      overflow-y: hidden;
-    `}
+  ${mQuery("up-lg")(css`
+    overflow: unset;
+    height: 100vh;
+  `)}
 
   ${mQuery("only-lg-xl")(css`
     padding-bottom: 80px;
@@ -29,7 +25,7 @@ const StyledSection = styled.section`
 `
 
 const Section = ({
-  heightFixedOnDesktop,
+  heightFixedOnMobile,
   hideScroll,
   hideContactData,
   hasLeftGap,
@@ -50,39 +46,27 @@ const Section = ({
     return () => window.removeEventListener("resize", setDimentions)
   }, [])
 
-  const hasFixedHeight = heightFixedOnDesktop ? windowWidth >= 1200 : true
+  const isDesktop = windowWidth >= breakpoints.up.lg
 
   const style = {
-    minHeight: windowHeight,
-    ...(hasFixedHeight && {
-      height: windowHeight,
+    ...(!isDesktop && {
+      minHeight: windowHeight,
+      ...(heightFixedOnMobile && {
+        height: windowHeight,
+      }),
     }),
   }
 
   return (
-    <StyledSection hasFixedHeight={hasFixedHeight} style={style} id={id}>
-      <SectionWrapper hasLeftGap={hasLeftGap} hasRightGap={true}>
-        {children}
-        <SiteContext.Consumer>
-          {({ socialMedia }) => <Socials socialMedia={socialMedia} />}
-        </SiteContext.Consumer>
-      </SectionWrapper>
+    <StyledSection className={`page-section`} style={style} id={id}>
+      <SectionWrapper hasLeftGap={hasLeftGap}>{children}</SectionWrapper>
       <BottomLine hideContactData={hideContactData} hideScroll={hideScroll} />
     </StyledSection>
   )
 }
 
-Section.propTypes = {
-  heightFixedOnDesktop: PropTypes.bool,
-  hideContactData: PropTypes.bool,
-  hideScroll: PropTypes.bool,
-  hasLeftGap: PropTypes.bool,
-  id: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
-}
-
 Section.defaultProps = {
-  heightFixedOnDesktop: false,
+  heightFixedOnMobile: true,
   hideContactData: false,
 }
 

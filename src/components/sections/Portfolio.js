@@ -1,6 +1,4 @@
 import React from "react"
-import Flip from "react-reveal/Flip"
-import Slide from "react-reveal/Slide"
 import PropTypes from "prop-types"
 
 import styled, { css } from "styled-components"
@@ -23,6 +21,10 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
+  ${mQuery("up-lg")(css`
+    height: 100%;
+  `)}
 `
 
 const Info = styled.div`
@@ -138,30 +140,26 @@ const Portfolio = ({ portfolioData }) => {
             reversed={index % 2 !== 0 ? true : false}
           >
             <Info>
-              <Flip bottom>
-                <Heading size="medium">
-                  <span>{title}</span>
-                  {subTitle && <span className="reversed"> | {subTitle}</span>}
-                </Heading>
-                <TextContainer size="medium">{description}</TextContainer>
-                <Button size="medium" hex={hex} link={buttonLink}>
-                  {buttonText}
-                  <Icon name="longArrow" />
-                </Button>
-              </Flip>
+              <Heading size="medium">
+                <span>{title}</span>
+                {subTitle && <span className="reversed"> | {subTitle}</span>}
+              </Heading>
+              <TextContainer size="medium">{description}</TextContainer>
+              <Button size="medium" hex={hex} link={buttonLink}>
+                {buttonText}
+                <Icon name="longArrow" />
+              </Button>
             </Info>
             <ImagesContainer>
-              <Slide left={index % 2 !== 0} right={index % 2 === 0}>
-                <Swiper autoplay spaceBetween={20} slidesPerView="auto">
-                  {projects.map(({ image: { fluid, alt }, link }, index) => (
-                    <SwiperSlide key={index}>
-                      <ImageLink href={link}>
-                        <Image fluid={fluid} alt={alt} />
-                      </ImageLink>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
-              </Slide>
+              <Swiper autoplay spaceBetween={20} slidesPerView="auto">
+                {projects.map(({ image: { fluid, alt }, link }, index) => (
+                  <SwiperSlide key={index}>
+                    <ImageLink href={link}>
+                      <Image fluid={fluid} alt={alt} />
+                    </ImageLink>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
             </ImagesContainer>
           </ProjectsWrapper>
         )
