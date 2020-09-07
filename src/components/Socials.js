@@ -1,9 +1,11 @@
-import React from "react"
+import React, { useRef, useEffect } from "react"
 import styled, { css } from "styled-components"
 import PropTypes from "prop-types"
+import gsap from "gsap"
 
 import Icon from "_components/Icon"
 import { mQuery, gaps, colors } from "_styles/theme"
+import { gsapSet, createTimeline } from "_utils/helpers"
 
 const Container = styled.div`
   display: none;
@@ -49,12 +51,25 @@ const Item = styled.a`
 
 const Socials = ({ socialMedia }) => {
   const { edges } = socialMedia
+  const socialsWrapper = useRef(null)
+
+  useEffect(() => {
+    const elements = socialsWrapper.current
+    const socialItems = elements.querySelectorAll(".social-item")
+
+    gsapSet([...socialItems], { autoAlpha: 0 })
+    createTimeline().to(socialItems, {
+      duration: 1,
+      autoAlpha: 1,
+      stagger: 0.3,
+    })
+  }, [])
 
   return (
     <Container>
-      <InnerContainer>
+      <InnerContainer ref={socialsWrapper}>
         {edges.map(({ node: { icon, url, title } }, index) => (
-          <Item href={url} alt={title} key={index}>
+          <Item className="social-item" href={url} alt={title} key={index}>
             <Icon name={icon} />
           </Item>
         ))}

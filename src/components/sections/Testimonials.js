@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useRef, useEffect } from "react"
 import styled, { css } from "styled-components"
 import SwiperCore, { Navigation, Autoplay } from "swiper"
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -7,6 +7,7 @@ import PropTypes from "prop-types"
 import Heading from "_typography/Heading"
 
 import { mQuery, colors, gaps } from "_styles/theme"
+import { registerScrollTrigger, gsapSet, createTimeline } from "_utils/helpers"
 
 SwiperCore.use([Navigation])
 SwiperCore.use([Autoplay])
@@ -155,9 +156,23 @@ const Value = styled.span`
 
 const Testimonials = ({ testimonialsData }) => {
   const { edges } = testimonialsData
+  const container = useRef(null)
+
+  useEffect(() => {
+    registerScrollTrigger()
+
+    gsapSet([container.current], {
+      autoAlpha: 0,
+    })
+
+    createTimeline(container.current).to(container.current, {
+      duration: 2,
+      autoAlpha: 1,
+    })
+  }, [])
 
   return (
-    <Container>
+    <Container ref={container}>
       <SliderNavigation>
         <NavButton className="testimonials-button-prev"></NavButton>
         <NavButton className="testimonials-button-next"></NavButton>

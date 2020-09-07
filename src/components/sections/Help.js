@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import PropTypes from "prop-types"
 
 import styled, { css } from "styled-components"
@@ -8,6 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react"
 import Heading from "_typography/Heading"
 
 import { mQuery, colors } from "_styles/theme"
+import { registerScrollTrigger, gsapSet, createTimeline } from "_utils/helpers"
 
 SwiperCore.use([Navigation])
 
@@ -105,9 +106,33 @@ const Help = ({ helpData }) => {
   const { edges } = helpData
   const [currentQuestion, setCurrentQuestion] = useState(0)
 
+  const answers = useRef(null)
+  const list = useRef(null)
+
+  useEffect(() => {
+    const questions = list.current.querySelectorAll(".question")
+
+    registerScrollTrigger()
+
+    gsapSet([answers.current, ...questions], {
+      autoAlpha: 0,
+    })
+
+    createTimeline(answers.current).to(answers.current, {
+      duration: 1,
+      autoAlpha: 1,
+    })
+
+    createTimeline(list.current).to(questions, {
+      duration: 1,
+      autoAlpha: 1,
+      stagger: 0.3,
+    })
+  }, [])
+
   return (
     <Container>
-      <Answers>
+      <Answers ref={answers}>
         {edges.map(({ node: { answer } }, index) => (
           <Heading
             key={index}
@@ -119,7 +144,7 @@ const Help = ({ helpData }) => {
           </Heading>
         ))}
       </Answers>
-      <List>
+      <List ref={list}>
         <Swiper slidesPerView="auto">
           {edges.map(({ node: { question } }, index) => (
             <SwiperSlide
@@ -128,7 +153,7 @@ const Help = ({ helpData }) => {
                 setCurrentQuestion(index)
               }}
             >
-              <QuestionWrap>
+              <QuestionWrap className="question">
                 <Title isActive={index === currentQuestion}>
                   Tytuł pytania
                 </Title>

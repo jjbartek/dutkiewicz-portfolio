@@ -24,26 +24,49 @@ const Container = styled.div`
 
 const Sections = ({ children }) => {
   useEffect(() => {
-    ScrollTrigger.matchMedia({
-      [`(min-width: ${breakpoints.up.lg}px)`]: function () {
-        const snapSections = gsap.utils.toArray(".page-section")
-        let snapper
-        ScrollTrigger.create({
-          trigger: snapSections[0],
-          start: "top bottom",
-          endTrigger: snapSections[snapSections.length - 1],
-          end: "bottom top",
-          onRefresh: self => {
-            let values = snapSections.map(section =>
-              gsap.utils.normalize(self.start, self.end, section.offsetTop)
-            )
-            values.push(1)
-            snapper = gsap.utils.snap(values)
-          },
-          snap: value => snapper(value),
-        })
-      },
-    })
+    // let sections = gsap.utils.toArray(".page-section")
+    // function goToSection(i) {
+    //   gsap.to(window, {
+    //     scrollTo: {
+    //       y: i * window.innerHeight,
+    //       autoKill: false,
+    //       ease: "Power3.easeInOut",
+    //     },
+    //     duration: 0.85,
+    //   })
+    // }
+    // sections.forEach((eachPanel, i) => {
+    //   console.log(eachPanel, i)
+    //   ScrollTrigger.create({
+    //     trigger: eachPanel,
+    //     onEnter: () => goToSection(i),
+    //   })
+    //   ScrollTrigger.create({
+    //     trigger: eachPanel,
+    //     start: "bottom bottom",
+    //     onEnterBack: () => goToSection(i),
+    //   })
+    // })
+    // ScrollTrigger.matchMedia({
+    //   [`(min-width: ${breakpoints.up.lg}px)`]: function () {
+    //     const snapSections = gsap.utils.toArray(".page-section")
+    //     let snapper
+    //     ScrollTrigger.create({
+    //       trigger: snapSections[0],
+    //       start: "top bottom",
+    //       endTrigger: snapSections[snapSections.length - 1],
+    //       end: "bottom top",
+    //       onRefresh: self => {
+    //         let values = snapSections.map(section =>
+    //           gsap.utils.normalize(self.start, self.end, section.offsetTop)
+    //         )
+    //         values.push(1)
+    //         snapper = gsap.utils.snap(values)
+    //       },
+    //       snap: value => snapper(value),
+    //     })
+    //   },
+    // })
   }, [])
 
   return (

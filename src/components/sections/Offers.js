@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useRef, useEffect } from "react"
 import PropTypes from "prop-types"
 
 import { Swiper, SwiperSlide } from "swiper/react"
@@ -11,6 +11,7 @@ import Heading from "_typography/Heading"
 import Icon from "_components/Icon"
 
 import { mQuery, colors } from "_styles/theme"
+import { registerScrollTrigger, gsapSet, createTimeline } from "_utils/helpers"
 
 const Container = styled.div`
   width: 100%;
@@ -28,6 +29,7 @@ const Container = styled.div`
 
 const Info = styled.div`
   max-width: 500px;
+  width: 100%;
 
   & > h1,
   & > p {
@@ -35,6 +37,7 @@ const Info = styled.div`
   }
 
   ${mQuery("up-lg")(css`
+    width: unset;
     flex: 0 1 42%;
     max-width: unset;
 
@@ -115,17 +118,14 @@ const Block = styled.div`
   }
 `
 const Blocks = styled.div`
+  width: 100%;
   ${mQuery("up-lg")(css`
+    width: unset;
     flex: 0 1 52%;
     height: 100%;
     display: flex;
-
-    .react-reveal {
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+    align-items: center;
+    justify-content: center;
   `)}
 `
 
@@ -217,7 +217,11 @@ const PersonalData = styled.div`
 const PDRow = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0 2.7rem;
+  margin: 0 1.7rem;
+
+  ${mQuery("up-lg")(css`
+    margin: 0 2.7rem;
+  `)}
 
   ${mQuery("up-lg")(css`
     margin: 0 3.7rem;
@@ -252,7 +256,7 @@ const Offer = ({ offer }) => {
   const { iconName, title, shortDescription, fullDescription } = offer
 
   return (
-    <Block>
+    <Block className={`block`}>
       <Icon name={iconName}></Icon>
       <Heading size="small">{title}</Heading>
       <TextContainer size="small">{shortDescription}</TextContainer>
@@ -267,9 +271,32 @@ const Offer = ({ offer }) => {
 const Offers = ({ offersData }) => {
   const { caption, heading, description, personalData, offers } = offersData
 
+  const info = useRef(null)
+  const blocks = useRef(null)
+
+  useEffect(() => {
+    const infoItems = info.current.children
+    const allBlocks = blocks.current.querySelectorAll(".block")
+
+    registerScrollTrigger()
+    gsapSet([...infoItems, ...allBlocks], { autoAlpha: 0 })
+
+    createTimeline(info.current).to(infoItems, {
+      duration: 1,
+      autoAlpha: 1,
+      stagger: 0.1,
+    })
+
+    createTimeline(blocks.current).to(allBlocks, {
+      duration: 1,
+      autoAlpha: 1,
+      stagger: 0.1,
+    })
+  }, [])
+
   return (
     <Container>
-      <Info>
+      <Info ref={info}>
         <Caption>{caption}</Caption>
         <Heading size="big">{heading}</Heading>
         <TextContainer size="big">{description}</TextContainer>
@@ -282,9 +309,9 @@ const Offers = ({ offersData }) => {
           ))}
         </PersonalData>
       </Info>
-      <Blocks>
+      <Blocks ref={blocks}>
         <MobileBlocks>
-          <Swiper spaceBetween={30} slidesPerView="auto">
+          <Swiper slidesPerView="auto" spaceBetween={30}>
             {offers.map((offer, index) => (
               <SwiperSlide key={index}>
                 <Offer offer={offer} />
@@ -294,7 +321,7 @@ const Offers = ({ offersData }) => {
         </MobileBlocks>
         <DesktopBlocks>
           {offers.map((offer, index) => (
-            <Offer key={index} offer={offer} />
+            <Offer id="social" key={index} offer={offer} />
           ))}
         </DesktopBlocks>
       </Blocks>

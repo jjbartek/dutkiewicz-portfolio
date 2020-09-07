@@ -12,7 +12,7 @@ const StyledSection = styled.section`
   box-sizing: border-box;
   padding-bottom: 123px;
   padding-top: 82px;
-  overflow-y: hidden;
+  width: 100%;
 
   ${mQuery("up-lg")(css`
     overflow: unset;

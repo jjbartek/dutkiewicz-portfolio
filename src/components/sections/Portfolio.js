@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useRef, useEffect } from "react"
 import PropTypes from "prop-types"
 
 import styled, { css } from "styled-components"
@@ -13,6 +13,8 @@ import TextContainer from "_typography/TextContainer"
 import Heading from "_typography/Heading"
 
 import { mQuery } from "_styles/theme"
+
+import { registerScrollTrigger, gsapSet, createTimeline } from "_utils/helpers"
 
 SwiperCore.use([Autoplay])
 
@@ -118,8 +120,31 @@ const ProjectsWrapper = styled.div`
 
 const Portfolio = ({ portfolioData }) => {
   const { edges } = portfolioData
+  const container = useRef(null)
+
+  useEffect(() => {
+    registerScrollTrigger()
+
+    const projectsWrapper = container.current.querySelectorAll(
+      ".projectsWrapper"
+    )
+
+    projectsWrapper.forEach((wrapper, index) => {
+      gsapSet([wrapper], {
+        autoAlpha: 0,
+        x: index % 2 === 0 ? "+=30%" : "-=30%",
+      })
+
+      createTimeline(wrapper).to(wrapper, {
+        duration: 1,
+        autoAlpha: 1,
+        x: index % 2 === 0 ? "-=30%" : "+=30%",
+      })
+    })
+  }, [])
+
   return (
-    <Container>
+    <Container ref={container}>
       {edges.map(
         (
           {
@@ -138,6 +163,7 @@ const Portfolio = ({ portfolioData }) => {
           <ProjectsWrapper
             key={index}
             reversed={index % 2 !== 0 ? true : false}
+            className="projectsWrapper"
           >
             <Info>
               <Heading size="medium">

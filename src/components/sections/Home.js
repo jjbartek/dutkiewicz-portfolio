@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useRef, useEffect } from "react"
 import styled, { css } from "styled-components"
 import PropTypes from "prop-types"
 import Img from "gatsby-image"
@@ -11,6 +11,7 @@ import TextContainer from "_typography/TextContainer"
 import SiteContext from "../../store/SiteContext"
 
 import { mQuery } from "_styles/theme"
+import { gsapSet, createTimeline } from "_utils/helpers"
 
 const Container = styled.div`
   display: flex;
@@ -70,9 +71,24 @@ const Home = ({ homeData }) => {
     image: { fluid },
   } = homeData
 
+  const content = useRef(null)
+  const image = useRef(null)
+
+  useEffect(() => {
+    const contentItems = content.current.children
+    const imageItem = image.current.imageRef.current
+
+    gsapSet([contentItems], { autoAlpha: 0 })
+    createTimeline().to(contentItems, {
+      duration: 1,
+      autoAlpha: 1,
+      stagger: 0.3,
+    })
+  }, [])
+
   return (
     <Container>
-      <Content>
+      <Content ref={content}>
         <Heading size="large">{heading}</Heading>
         <TextContainer size="medium">{description}</TextContainer>
         <DataWrap>
@@ -81,7 +97,7 @@ const Home = ({ homeData }) => {
           </SiteContext.Consumer>
         </DataWrap>
       </Content>
-      <HomeImg fluid={fluid} />
+      <HomeImg fluid={fluid} ref={image} />
     </Container>
   )
 }

@@ -15,6 +15,11 @@ export const Logo = styled(Link)`
   border: 0;
   outline: 0;
   padding: 0;
+  transition: 0.3s ease-in-out opacity;
+
+  &:hover {
+    opacity: 0.7;
+  }
 
   ${mQuery("up-lg")(css`
     margin-right: 5.5rem;
@@ -49,7 +54,6 @@ export const Bar = styled.div`
   left: 0;
   right: 0;
   height: ${({ triggered }) => (triggered ? "82px" : "120px")};
-  padding: 20px;
   box-sizing: border-box;
   z-index: 999;
   transition: 0.3s ease-in-out height, 0.3s ease-in-out background;
@@ -160,6 +164,7 @@ export const MenuLink = styled(Link)`
   background: none;
   border: 0;
   outline: 0;
+  transition: 0.3s ease-in-out color;
 
   &:hover {
     color: ${colors.white};
