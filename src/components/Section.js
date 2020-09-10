@@ -26,8 +26,7 @@ const StyledSection = styled.section`
 
 const Section = ({
   heightFixedOnMobile,
-  hideScroll,
-  hideContactData,
+  hasBottomLine,
   hasLeftGap,
   children,
   id,
@@ -60,14 +59,22 @@ const Section = ({
   return (
     <StyledSection className={`page-section`} style={style} id={id}>
       <SectionWrapper hasLeftGap={hasLeftGap}>{children}</SectionWrapper>
-      <BottomLine hideContactData={hideContactData} hideScroll={hideScroll} />
+      {hasBottomLine && <BottomLine />}
     </StyledSection>
   )
 }
 
+Section.props = {
+  heightFixedOnMobile: PropTypes.bool,
+  hasBottomLine: PropTypes.bool,
+  hasLeftGap: PropTypes.bool,
+  children: PropTypes.node.isRequired,
+  id: PropTypes.string.isRequired
+}
+
 Section.defaultProps = {
   heightFixedOnMobile: true,
-  hideContactData: false,
+  hasBottomLine: false,
 }
 
 export default Section

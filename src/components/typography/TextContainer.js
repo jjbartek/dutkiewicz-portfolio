@@ -35,6 +35,22 @@ const StyledTextContainer = styled.p`
         font-size: 1.3rem;
       `)}
     `}
+
+
+    ${({ textContainerSize }) =>
+    textContainerSize === "big" &&
+    css`
+      font-size: 1.3rem;
+      line-height: 200%;
+
+      ${mQuery("up-sm")(css`
+        font-size: 1.6rem;
+      `)}
+
+      ${mQuery("only-lg-xl")(css`
+        font-size: 1.4rem;
+      `)}
+    `}
 `
 
 const TextContainer = ({ size, as, children }) => {

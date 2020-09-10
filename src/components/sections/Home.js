@@ -52,7 +52,7 @@ const HomeImg = styled(Img)`
     display: block;
     flex: 0 1 30%;
     margin-left: auto;
-    margin-right: 11%;
+    margin-right: 3rem;
   `)}
 `
 

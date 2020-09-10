@@ -42,7 +42,7 @@ const Info = styled.div`
     max-width: unset;
 
     & > p {
-      width: 60%;
+      width: 86%;
     }
   `)}
 `

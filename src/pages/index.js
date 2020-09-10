@@ -35,14 +35,10 @@ const IndexPage = ({ data }) => {
       <Layout title="Home">
         <Header headerData={headerData}></Header>
         <Sections>
-          <Section id="home">
+          <Section id="home" hasBottomLine={true}>
             <Home homeData={homeData} />
           </Section>
-          <Section
-            id="offers"
-            hideContactData={true}
-            heightFixedOnMobile={false}
-          >
+          <Section id="offers" heightFixedOnMobile={false}>
             <Offers offersData={offersData} />
           </Section>
           <Section id="portfolio" heightFixedOnMobile={false}>
@@ -51,7 +47,7 @@ const IndexPage = ({ data }) => {
           <Section id="testimonials" hasLeftGap={true}>
             <Testimonials testimonialsData={testimonialsData} />
           </Section>
-          <Section id="help" hideScroll={true}>
+          <Section id="help">
             <Help helpData={helpData} />
           </Section>
         </Sections>

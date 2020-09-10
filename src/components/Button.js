@@ -28,6 +28,18 @@ const StyledButton = styled.button`
       `)}
     `}
 
+    ${({ size }) =>
+    size === "medium-square" &&
+    css`
+      font-size: 1.3rem;
+      padding: 17px 12px;
+
+      ${mQuery("up-xl")(css`
+        font-size: 1.4rem;
+        padding: 20px 15px;
+      `)}
+    `}
+
   ${({ size }) =>
     size === "large" &&
     css`

@@ -48,7 +48,7 @@ export const SideRow = styled.div`
 `
 
 export const Bar = styled.div`
-  background: ${({ triggered }) => (triggered ? "#1D1D21" : "none")};
+  background: ${colors.bodyBg};
   position: fixed;
   top: 0;
   left: 0;
@@ -156,7 +156,7 @@ export const MenuItem = styled.li`
 
 export const MenuLink = styled(Link)`
   color: ${colors.grey};
-  font-size: 2.3rem;
+  font-size: 1.4rem;
   font-weight: 600;
   letter-spacing: 0.25rem;
   text-transform: uppercase;

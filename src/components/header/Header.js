@@ -36,7 +36,7 @@ const LanguageSwicher = () => {
                 changeLocale(language)
                 console.log(language)
               }}
-              size="large"
+              size="medium-square"
             >
               {messages[language]}
             </Button>
@@ -71,7 +71,7 @@ const HeaderSideRow = ({ button }) => {
     <SideRow>
       <LanguageSwicher />
       {button.map(({ title, url }) => (
-        <Button key={title} link={url} size="large" color="blue">
+        <Button key={title} link={url} size="medium" color="blue">
           {title}
         </Button>
       ))}
