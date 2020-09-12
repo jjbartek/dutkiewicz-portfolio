@@ -6,7 +6,7 @@ import { injectIntl, FormattedMessage } from "gatsby-plugin-intl"
 import Contact from "_components/Contact"
 import Icon from "_components/Icon"
 
-import { mQuery, colors, gaps } from "_styles/theme"
+import { mQuery, colors } from "_styles/theme"
 import { Wrapper } from "_styles/sharedStyles"
 
 import SiteContext from "../store/SiteContext"

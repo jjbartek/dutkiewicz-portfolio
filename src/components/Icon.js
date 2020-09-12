@@ -41,6 +41,10 @@ font-family: "icomoon" !important;
 `
 
 const icons = {
+  quality: "e923",
+  cooperation: "e924",
+  hourglass: "e925",
+  money: "e926",
   arrowVerticalLong: "e921",
   arrowVerticalShort: "e922",
   arrowHorizontalLong: "e91f",

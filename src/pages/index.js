@@ -6,6 +6,7 @@ import Layout from "_components/layouts/Default"
 import Header from "_components/header/Header"
 import Sections from "_components/Sections"
 import Section from "_components/Section"
+import Footer from "_components/Footer"
 
 import Testimonials from "_sections/Testimonials"
 import Portfolio from "_sections/Portfolio"
@@ -51,6 +52,7 @@ const IndexPage = ({ data }) => {
             <Help helpData={helpData} />
           </Section>
         </Sections>
+        <Footer />
       </Layout>
     </SiteContext.Provider>
   )
@@ -122,6 +124,7 @@ export const IndexData = graphql`
       edges {
         node {
           question
+          category
           answer
         }
       }

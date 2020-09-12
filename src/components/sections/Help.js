@@ -36,7 +36,7 @@ const List = styled.div`
     height: auto;
     position: relative;
     margin-right: 15px;
-    border: 2px solid #171718; //GET FROM VARIABLE
+    border: 2px solid #171718;
     border-radius: 8px;
     padding: 2rem;
     box-sizing: border-box;
@@ -111,18 +111,14 @@ const Help = ({ helpData }) => {
 
   useEffect(() => {
     const questions = list.current.querySelectorAll(".question")
-
     registerScrollTrigger()
-
     gsapSet([answers.current, ...questions], {
       autoAlpha: 0,
     })
-
     createTimeline(answers.current).to(answers.current, {
       duration: 1,
       autoAlpha: 1,
     })
-
     createTimeline(list.current).to(questions, {
       duration: 1,
       autoAlpha: 1,
@@ -146,7 +142,7 @@ const Help = ({ helpData }) => {
       </Answers>
       <List ref={list}>
         <Swiper slidesPerView="auto">
-          {edges.map(({ node: { question } }, index) => (
+          {edges.map(({ node: { category, question } }, index) => (
             <SwiperSlide
               key={index}
               onClick={() => {
@@ -154,9 +150,7 @@ const Help = ({ helpData }) => {
               }}
             >
               <QuestionWrap className="question">
-                <Title isActive={index === currentQuestion}>
-                  Tytuł pytania
-                </Title>
+                <Title isActive={index === currentQuestion}>{category}</Title>
                 <Question isActive={index === currentQuestion}>
                   {question}
                 </Question>

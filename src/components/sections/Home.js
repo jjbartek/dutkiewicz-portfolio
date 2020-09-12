@@ -76,7 +76,6 @@ const Home = ({ homeData }) => {
 
   useEffect(() => {
     const contentItems = content.current.children
-    const imageItem = image.current.imageRef.current
 
     gsapSet([contentItems], { autoAlpha: 0 })
     createTimeline().to(contentItems, {

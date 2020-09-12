@@ -191,10 +191,12 @@ const DesktopBlocks = styled.div`
 
   ${mQuery("only-lg-xl")(css`
     gap: 18px;
-    max-height: 91%;
+    max-height: 500px;
 
     ${Block} {
-      & > h2 {
+      display: flex;
+      flex-direction: column;
+      justify-content: center & > h2 {
         margin: 0.3rem 0 0.2rem 0;
       }
 

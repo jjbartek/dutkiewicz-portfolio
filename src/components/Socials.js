@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from "react"
 import styled, { css } from "styled-components"
 import PropTypes from "prop-types"
-import gsap from "gsap"
 
 import Icon from "_components/Icon"
 import { mQuery, gaps, colors } from "_styles/theme"

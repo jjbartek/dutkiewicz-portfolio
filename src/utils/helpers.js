@@ -21,7 +21,7 @@ export const registerScrollTrigger = () => {
 
 export const createTimeline = trigger => {
   return gsap.timeline({
-    ...(trigger !== "undefined" && {
+    ...(typeof trigger !== "undefined" && {
       scrollTrigger: {
         trigger: trigger,
         start: "top bottom",
