@@ -36,6 +36,7 @@ const StyledSection = styled.section`
     hasFooter &&
     css`
       ${mQuery("up-lg")(css`
+        height: 90vh;
         padding-bottom: 120px;
       `)}
 
@@ -48,7 +49,7 @@ const StyledSection = styled.section`
     isTiny &&
     css`
       ${mQuery("up-lg")(css`
-        height: 60vh;
+        height: 70vh;
       `)}
     `}
 `
