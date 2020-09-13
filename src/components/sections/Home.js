@@ -60,7 +60,7 @@ const DataWrap = styled.div`
   display: none;
 
   ${mQuery("up-lg")(css`
-    display: flex;
+    display: none;
   `)}
 `
 
