@@ -18,7 +18,11 @@ const Container = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 100%;
-  height: 100%;
+  position: relative;
+
+  ${mQuery("up-lg")(css`
+    height: 100%;
+  `)}
 
   .swiper-container {
     display: flex;
@@ -45,6 +49,7 @@ const Container = styled.div`
     flex-direction: column;
     height: 100%;
     display: flex;
+    width: 100%; //calc(100vw - 20px);
 
     & > p {
       margin-bottom: 40px;
@@ -52,6 +57,7 @@ const Container = styled.div`
 
     ${mQuery("up-lg")(css`
       justify-content: center;
+      width: unset;
     `)}
   }
 `
@@ -59,7 +65,6 @@ const Container = styled.div`
 const SliderNavigation = styled.div`
   display: flex;
   width: 100%;
-  justify-content: space-between;
   align-items: center;
   order: 1;
   margin-top: 2rem;
@@ -68,13 +73,15 @@ const SliderNavigation = styled.div`
     position: absolute;
     top: 0;
     bottom: 0;
-    left: ${gaps.wrapper};
+    left: 0;
     width: ${gaps.socials};
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
     order: unset;
     margin-top: 0;
+    transform: translateX(-100%);
+    padding-top: 1.5rem;
   `)}
 `
 
@@ -98,9 +105,14 @@ const NavButton = styled.button`
   &:before {
     font-family: "icomoon" !important;
     font-size: 1em;
-    margin-top: 1px;
     color: inherit;
+    margin-right: 2rem;
     transition: 0.3s ease-in-out color;
+
+    ${mQuery("up-lg")(css`
+      margin-top: 1px;
+      margin-right: unset;
+    `)}
   }
 
   &.testimonials-button-prev:before {
@@ -141,6 +153,13 @@ const Row = styled.div`
     margin-right: 0;
   }
 `
+const Testimonial = styled.div`
+  max-width: 600px;
+
+  ${mQuery("up-lg")(css`
+    max-width: unset;
+  `)}
+`
 
 const Title = styled.span`
   color: ${colors.grey};
@@ -178,22 +197,21 @@ const Testimonials = ({ testimonialsData }) => {
         <NavButton className="testimonials-button-next"></NavButton>
       </SliderNavigation>
       <Swiper
-        slidesPerView="auto"
         breakpoints={{
           1200: {
             direction: "vertical",
-            slidesPerView: 1,
           },
         }}
         navigation={{
           prevEl: ".testimonials-button-prev",
           nextEl: ".testimonials-button-next",
         }}
+        slidesPerView={1}
         autoplay
       >
         {edges.map(({ node: { content, date, author } }, key) => (
           <SwiperSlide key={key}>
-            <div>
+            <Testimonial>
               <Heading as="h2" size="big">
                 “{content}”
               </Heading>
@@ -207,7 +225,7 @@ const Testimonials = ({ testimonialsData }) => {
                   <Value>{date}</Value>
                 </Row>
               </Details>
-            </div>
+            </Testimonial>
           </SwiperSlide>
         ))}
       </Swiper>

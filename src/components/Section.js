@@ -8,25 +8,56 @@ import { SectionWrapper } from "_styles/sharedStyles"
 
 const StyledSection = styled.section`
   position: relative;
-  min-height: 100vh;
   box-sizing: border-box;
-  padding-bottom: 123px;
-  padding-top: 82px;
+  padding-top: 5rem;
   width: 100%;
 
   ${mQuery("up-lg")(css`
+    padding-top: 82px;
     overflow: unset;
-    height: 100vh;
+    height: 80vh;
   `)}
 
-  ${mQuery("only-lg-xl")(css`
-    padding-bottom: 80px;
-  `)}
+  ${({ hasBottomLine }) =>
+    hasBottomLine &&
+    css`
+      padding-bottom: 123px;
+
+      ${mQuery("up-lg")(css`
+        height: 100vh;
+      `)}
+
+      ${mQuery("only-lg-xl")(css`
+        padding-bottom: 80px;
+      `)}
+    `}
+
+  ${({ hasFooter }) =>
+    hasFooter &&
+    css`
+      ${mQuery("up-lg")(css`
+        padding-bottom: 120px;
+      `)}
+
+      ${mQuery("only-xl")(css`
+        padding-bottom: 148px;
+      `)}
+    `}
+
+  ${({ isTiny }) =>
+    isTiny &&
+    css`
+      ${mQuery("up-lg")(css`
+        height: 60vh;
+      `)}
+    `}
 `
 
 const Section = ({
   heightFixedOnMobile,
   hasBottomLine,
+  hasFooter,
+  isTiny,
   hasLeftGap,
   children,
   id,
@@ -49,7 +80,6 @@ const Section = ({
 
   const style = {
     ...(!isDesktop && {
-      minHeight: windowHeight,
       ...(heightFixedOnMobile && {
         height: windowHeight,
       }),
@@ -57,7 +87,14 @@ const Section = ({
   }
 
   return (
-    <StyledSection className={`page-section`} style={style} id={id}>
+    <StyledSection
+      hasBottomLine={hasBottomLine}
+      hasFooter={hasFooter}
+      isTiny={isTiny}
+      className={`page-section`}
+      style={style}
+      id={id}
+    >
       <SectionWrapper hasLeftGap={hasLeftGap}>{children}</SectionWrapper>
       {hasBottomLine && <BottomLine />}
     </StyledSection>
@@ -67,14 +104,18 @@ const Section = ({
 Section.props = {
   heightFixedOnMobile: PropTypes.bool,
   hasBottomLine: PropTypes.bool,
+  hasFooter: PropTypes.bool,
   hasLeftGap: PropTypes.bool,
+  isTiny: PropTypes.bool,
   children: PropTypes.node.isRequired,
-  id: PropTypes.string.isRequired
+  id: PropTypes.string.isRequired,
 }
 
 Section.defaultProps = {
-  heightFixedOnMobile: true,
+  heightFixedOnMobile: false,
   hasBottomLine: false,
+  hasFooter: false,
+  isTiny: false,
 }
 
 export default Section

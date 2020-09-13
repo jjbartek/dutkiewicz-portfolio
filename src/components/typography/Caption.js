@@ -26,7 +26,7 @@ const StyledCaption = styled.h3`
   }
 
   ${mQuery("up-lg")(css`
-    font-size: 1.8rem;
+    font-size: 1.6rem;
 
     &:before {
       flex: 0 1 84px;

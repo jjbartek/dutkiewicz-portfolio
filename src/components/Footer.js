@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from "react"
 import styled, { css } from "styled-components"
+import { FormattedMessage } from "gatsby-plugin-intl"
 
 import { Wrapper } from "_styles/sharedStyles"
 import { mQuery, colors } from "_styles/theme"
@@ -8,7 +9,9 @@ import { registerScrollTrigger, gsapSet, createTimeline } from "_utils/helpers"
 const Wrap = styled(Wrapper)`
   display: flex;
   flex-wrap: wrap;
-  padding: 2rem 0;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  margin-top: 4rem;
 
   ${mQuery("up-lg")(css`
     flex-direction: row;
@@ -17,7 +20,8 @@ const Wrap = styled(Wrapper)`
     align-items: center;
     height: 120px;
     margin-top: -120px;
-    padding: 0;
+    padding-top: unset;
+    padding-bottom: unset;
   `)}
 
   ${mQuery("up-xl")(css`
@@ -27,12 +31,12 @@ const Wrap = styled(Wrapper)`
 `
 
 const Copyright = styled.p`
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   margin: 0;
   color: ${colors.grey};
   width: 100%;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   line-height: 150%;
 
   &::last-child {
@@ -40,6 +44,7 @@ const Copyright = styled.p`
   }
 
   ${mQuery("up-lg")(css`
+    font-size: 1.6rem;
     width: unset;
     text-align: unset;
     margin-bottom: unset;
@@ -48,6 +53,11 @@ const Copyright = styled.p`
   a {
     color: ${colors.white};
     font-weight: bold;
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+      color: ${colors.blue};
+    }
   }
 `
 
@@ -73,10 +83,13 @@ const Footer = () => {
   return (
     <Wrap ref={footer}>
       <Copyright>
-        Wszystkie prawa zastrzeżone &copy; 2020 dutkiewiczdesign.pl
+        <FormattedMessage id="all-rights-reserved" /> &copy; 2020
+        dutkiewiczdesign.pl
       </Copyright>
       <Copyright>
-        Realizacja: <a href="http://bartekjonca.pl">Bartek Jońca</a>
+        <FormattedMessage id="created-by" />
+        :&nbsp;
+        <a href="http://bartekjonca.pl">Bartek Jońca</a>
       </Copyright>
     </Wrap>
   )

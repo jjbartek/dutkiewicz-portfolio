@@ -36,19 +36,19 @@ const IndexPage = ({ data }) => {
       <Layout title="Home">
         <Header headerData={headerData}></Header>
         <Sections>
-          <Section id="home" hasBottomLine={true}>
+          <Section id="home" hasBottomLine={true} heightFixedOnMobile={true}>
             <Home homeData={homeData} />
           </Section>
-          <Section id="offers" heightFixedOnMobile={false}>
+          <Section id="offers">
             <Offers offersData={offersData} />
           </Section>
-          <Section id="portfolio" heightFixedOnMobile={false}>
+          <Section id="portfolio">
             <Portfolio portfolioData={portfolioData} />
           </Section>
-          <Section id="testimonials" hasLeftGap={true}>
+          <Section id="testimonials" isTiny={true} hasLeftGap={true}>
             <Testimonials testimonialsData={testimonialsData} />
           </Section>
-          <Section id="help">
+          <Section id="help" hasFooter={true}>
             <Help helpData={helpData} />
           </Section>
         </Sections>

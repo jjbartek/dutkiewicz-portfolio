@@ -40,6 +40,9 @@ const List = styled.div`
     border-radius: 8px;
     padding: 2rem;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     &:last-child {
       margin-right: 20px !important;
@@ -51,6 +54,7 @@ const List = styled.div`
       width: calc(25% - 42px);
       padding: 0;
       margin-right: 56px;
+      justify-content: flex-start;
 
       &:last-child {
         margin-right: 0 !important;
@@ -60,9 +64,13 @@ const List = styled.div`
 `
 const Title = styled.p`
   color: ${colors.grey};
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-weight: 600;
   transition: 0.2s ease-in-out color;
+
+  ${mQuery("up-lg")(css`
+    font-size: 1.6rem;
+  `)}
 
   ${({ isActive }) =>
     isActive &&
@@ -72,13 +80,16 @@ const Title = styled.p`
 `
 
 const Answers = styled.div`
+  max-width: 600px;
+
   ${mQuery("up-lg")(css`
     width: 55%;
+    max-width: unset;
   `)}
 `
 
 const Question = styled.p`
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: 500;
   line-height: 153%;
 
