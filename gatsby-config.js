@@ -17,25 +17,13 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
-      resolve: `gatsby-plugin-prefetch-google-fonts`,
+      resolve: `gatsby-plugin-google-fonts-with-attributes`,
       options: {
-        fonts: [
-          {
-            family: `Poppins`,
-            variants: [
-              "100",
-              "300",
-              "400",
-              "400i",
-              "500",
-              "600",
-              "700",
-              "800",
-              "900",
-            ],
-            subsets: ["latin-ext"],
-          },
-        ],
+        fonts: [`Poppins\:100,300,400,400i,500,600,700,800,900`],
+        display: "swap",
+        attributes: {
+          subset: "latin-ext",
+        },
       },
     },
     {
